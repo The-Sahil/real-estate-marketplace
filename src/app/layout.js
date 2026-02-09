@@ -2,7 +2,7 @@ import { Providers } from "@/components/providers";
 import "./globals.css";
 
 export const metadata = {
-  title: "Sahil Estates",
+  title: "Real Estate Marketplace",
   description: "Find Your Dream Home",
 };
 

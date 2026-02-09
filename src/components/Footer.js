@@ -11,9 +11,9 @@ export default function Footer() {
 
                     {/* Brand */}
                     <Box flex="1">
-                        <Heading size="lg" color="teal.400" mb={4}>Sahil Estates</Heading>
+                        <Heading size="lg" color="teal.400" mb={4}>Real Estate Marketplace</Heading>
                         <Text fontSize="sm" maxW="300px">
-                            Helping you find the perfect place to call home. Sahil Estates is your trusted partner in real estate.
+                            Helping you find the perfect place to call home. Real Estate Marketplace is your trusted partner in real estate.
                         </Text>
                     </Box>
 
@@ -51,7 +51,7 @@ export default function Footer() {
                 </Stack>
 
                 <Box borderTopWidth={1} borderColor="gray.700" mt={12} pt={8} textAlign="center">
-                    <Text fontSize="sm">&copy; {new Date().getFullYear()} Sahil Estates. All rights reserved.</Text>
+                    <Text fontSize="sm">&copy; {new Date().getFullYear()} Real Estate Marketplace. All rights reserved.</Text>
                 </Box>
             </Container>
         </Box>

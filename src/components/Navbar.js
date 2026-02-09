@@ -20,7 +20,7 @@ export default function Navbar() {
                 <Flex alignItems="center">
                     <Link href="/" passHref legacyBehavior>
                         <Heading as="a" size="lg" color="teal.500" cursor="pointer">
-                            Sahil Estates
+                            Real Estate Marketplace
                         </Heading>
                     </Link>
                     <Spacer />
