@@ -28,8 +28,8 @@ export default function PropertyCard({ property }) {
             transition={{ duration: 0.2 }}
             position="relative"
         >
-            <Link href={`/property/${id}`} passHref legacyBehavior>
-                <Box as="a" position="absolute" top={0} left={0} right={0} bottom={0} zIndex={1} />
+            <Link href={`/property/${id}`}>
+                <Box position="absolute" top={0} left={0} right={0} bottom={0} zIndex={1} />
             </Link>
 
             <Box position="relative">

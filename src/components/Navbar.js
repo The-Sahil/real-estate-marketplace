@@ -18,8 +18,8 @@ export default function Navbar() {
         <Box bg="white" boxShadow="sm" py={4} position="sticky" top={0} zIndex={100}>
             <Container maxW="container.xl">
                 <Flex alignItems="center">
-                    <Link href="/" passHref legacyBehavior>
-                        <Heading as="a" size="lg" color="teal.500" cursor="pointer">
+                    <Link href="/">
+                        <Heading size="lg" color="teal.500" cursor="pointer">
                             Real Estate Marketplace
                         </Heading>
                     </Link>
