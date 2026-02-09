@@ -1,66 +1,75 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+
+import { Container, SimpleGrid, Heading, Box, Text, VStack } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import Navbar from '@/components/Navbar';
+import HeroSection from '@/components/HeroSection';
+import PropertyCard from '@/components/PropertyCard';
+import SearchFilters from '@/components/SearchFilters';
+import Footer from '@/components/Footer';
+import { properties } from '@/data';
+import { useFilters } from '@/context/FilterContext';
+
+const MotionSimpleGrid = motion(SimpleGrid);
 
 export default function Home() {
+  const { filters } = useFilters();
+
+  const filteredProperties = properties.filter(property => {
+    // Filter by Type
+    if (filters.type !== 'All' && property.type !== filters.type) return false;
+
+    // Filter by Price
+    if (property.price > filters.maxPrice) return false;
+
+    // Filter by Beds
+    if (filters.beds !== 'Any' && property.beds < parseInt(filters.beds)) return false;
+
+    // Filter by Location
+    if (filters.location && !property.location.toLowerCase().includes(filters.location.toLowerCase())) return false;
+
+    return true;
+  });
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <Box minH="100vh" display="flex" flexDirection="column">
+      <Navbar />
+      <HeroSection />
+
+      <Container maxW="container.xl" flex="1">
+        <SearchFilters />
+
+        <Box mb={12} mt={12}>
+          <Heading as="h2" size="xl" mb={4} color="gray.700">
+            Featured Properties
+          </Heading>
+          <Text fontSize="lg" color="gray.500">
+            {filteredProperties.length} properties found based on your criteria.
+          </Text>
+        </Box>
+
+        {filteredProperties.length > 0 ? (
+          <MotionSimpleGrid
+            columns={{ base: 1, md: 2, lg: 3 }}
+            spacing={10}
+            mb={20}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, staggerChildren: 0.1 }}
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            {filteredProperties.map((property) => (
+              <PropertyCard key={property.id} property={property} />
+            ))}
+          </MotionSimpleGrid>
+        ) : (
+          <VStack spacing={4} minH="300px" justify="center">
+            <Text fontSize="xl" color="gray.500">No properties found matching your filters.</Text>
+            <Text color="teal.500" cursor="pointer" onClick={() => window.location.reload()}>Clear Filters</Text>
+          </VStack>
+        )}
+      </Container>
+
+      <Footer />
+    </Box>
   );
 }
