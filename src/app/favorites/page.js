@@ -43,11 +43,9 @@ export default function Favorites() {
                 ) : (
                     <VStack spacing={6} minH="300px" justify="center" textAlign="center">
                         <Text fontSize="xl" color="gray.500">You haven't saved any properties yet.</Text>
-                        <Link href="/" passHref>
-                            <Button colorScheme="teal" size="lg">
-                                Browse Properties
-                            </Button>
-                        </Link>
+                        <Button as={Link} href="/" colorScheme="teal" size="lg">
+                            Browse Properties
+                        </Button>
                     </VStack>
                 )}
             </Container>

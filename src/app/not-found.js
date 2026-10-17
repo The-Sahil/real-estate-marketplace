@@ -14,11 +14,9 @@ export default function NotFound() {
                     <Text fontSize="lg" color="gray.500">
                         Sorry, we couldn't find the page you're looking for.
                     </Text>
-                    <Link href="/" passHref>
-                        <Button colorScheme="teal" size="lg" leftIcon={<Icon as={FaHome} />}>
-                            Back to Home
-                        </Button>
-                    </Link>
+                    <Button as={Link} href="/" colorScheme="teal" size="lg" leftIcon={<Icon as={FaHome} />}>
+                        Back to Home
+                    </Button>
                 </VStack>
             </Container>
         </Box>
